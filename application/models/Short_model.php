@@ -24,13 +24,9 @@ class Short_model extends CI_Model
         public  function  insert_entry($url, $userUrlCode) 
         { 
                 $siteUrl=base_url();
-                //del from 10 day
-                // $this->db->select('short_date');
-                // $this->db->from('short_table');
-                // $this->db->where('short_date' > UNIX_TIMESTAMP(NOW() - INTERVAL 24 HOUR));
 
                 $dt = new Datetime();   //create object for current date/time
-                $dt->modify('10 day ago');   //substract 15 minutes
+                $dt->modify('10 day ago');   //substract 10 day
                 $sdt = $dt->format('Y-m-d H:i:s');  //format it into a datetime string
                 $this->db->select('short_date');
                 $this->db->from('short_table');
@@ -57,7 +53,7 @@ class Short_model extends CI_Model
                                 else{
                                         return $this->output
                                         ->set_content_type('application/json')
-                                        ->set_status_header(500,'Please, enter another code!');
+                                        ->set_status_header(503,'Please, enter another code!');
                                         // $err ='Please, enter another code!';
                                         // return $err; 
                                 }

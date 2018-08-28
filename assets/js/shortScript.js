@@ -1,5 +1,7 @@
 $(document).ready(function(){
     $('#btn-shorten').on('click', sendUrl);
+    $('#btn-data-base').on('click', dataBase);
+    $('#btn-home').on('click', homePage);
 });
 var API_URL = 'http://localhost:8035/CIShotener/index.php/short/insert'
 var sendUrl = function(){
@@ -29,3 +31,11 @@ var sendUrl = function(){
 var modalErr=function () {
         $("#myModalErr").modal('show');
 };
+var dataBase=function () {
+    window.location.href= 'http://localhost:8035/CIShotener/index.php/short/showDB';
+    
+};
+var homePage=function () {
+    window.location.href= 'http://localhost:8035/CIShotener/index.php/short/Index';
+    
+}

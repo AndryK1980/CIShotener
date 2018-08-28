@@ -19,6 +19,7 @@
                            <input id="short-url-field" name="userUrlCode" type="text" class="form-control form-control-input" placeholder="Paste your short url">
                            <span class="input-group-btn">
                                <button id="btn-shorten" class="btn btn-shorten" type="button">SHORTEN</button>
+                               <button id="btn-data-base" class="btn btn-shorten" type="button">Data Base</button>
                            </span>
                        </div>
                    </div>
@@ -29,15 +30,6 @@
                </div>
            </div>
 
-<ul>
-<?php  
-    foreach($short_table as $row){
-        echo "<li>";
-        echo $row['id'];echo $row['url'];echo $row['url_code'];echo $row['short_url'];echo $row['short_date'];//echo $massegeError;
-        echo "</li>";
-    } 
-    ?>
- </ul>
  <div id="myModalErr" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content short-model-content">

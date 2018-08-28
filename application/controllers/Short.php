@@ -14,17 +14,13 @@ class Short extends CI_Controller {
         //$this->load->library('form_validation');
    }
 
-	public function index()//method 1
+	public function index()//method show home view
 	{
-
-        $Shortdata['short_table']  =  $this -> Short_model -> get_last_ten_entries(); 
-        
-        $this -> load -> view ( 'short_view' ,  $Shortdata );
+        $this -> load -> view ( 'short_view' );
     }
-    public function insert()//method 2
+    public function insert()//method insert data in DB
 	{
         $u=$this->input->post(null,true);
-        //$ucode=$this->input->post('userUrlCode');
         
        $u['url']=prep_url($u['url']);
        $response =get_headers($u['url']) ;
@@ -34,7 +30,7 @@ class Short extends CI_Controller {
        else{
         return $this->output
             ->set_content_type('application/json')
-            ->set_status_header(500,'You enter no valid URL');
+            ->set_status_header(503,'You enter no valid URL');
             
        }     
 
@@ -43,17 +39,15 @@ class Short extends CI_Controller {
 
         
     }
+    //redirect url
     public function redirect_url(){
-        $ThisUrlCode=$this->uri->segment(1);//get the segment the user requested e.g. Nw from http://short.local/Nw
+        $ThisUrlCode=$this->uri->segment(1);//get the first segment
         $dataUrl['myUrl']=$this->Short_model->redirect_url($ThisUrlCode);
-      redirect($dataUrl['myUrl']);//direct the user to the long URL the short URL is connected to 🙂 MAGIC
-      //$this -> load -> view('test_short_view',$dataUrl);
+      redirect($dataUrl['myUrl']);//direct the user to the long URL the short URL is connected
     }
     public function showDB()//show DB
 	{
-
-        $Shortdata['short_table']  =  $this -> Short_model -> get_last_ten_entries(); 
-        
+        $Shortdata['short_table']  =  $this -> Short_model -> get_last_ten_entries();
         $this -> load -> view ( 'all_url_show' ,  $Shortdata );
     }
 }
