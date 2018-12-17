@@ -17,6 +17,9 @@ class Auth extends CI_Controller
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+
+		
+		
 	}
 
 	/**
@@ -24,10 +27,15 @@ class Auth extends CI_Controller
 	 */
 	public function index()
 	{
+		// if ($this->ion_auth->logged_in())
+		// {
+		// 	redirect('index.php/short', 'refresh');
+		// }
 
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
+			
 			redirect('index.php/auth/login', 'refresh');
 		}
 		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
@@ -58,6 +66,7 @@ class Auth extends CI_Controller
 	 */
 	public function login()
 	{
+		
 		$this->data['title'] = $this->lang->line('login_heading');
 
 		// validate form input
@@ -82,7 +91,7 @@ class Auth extends CI_Controller
 				if ($this->ion_auth->in_group($group))
 				{
 						$this->session->set_flashdata('message', 'You must be a gangsta to view this page');
-						redirect('welcome/index');
+						redirect('index.php/short/index');
 				}
 				
 			else
@@ -102,10 +111,14 @@ class Auth extends CI_Controller
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
+				'class' => 'form-control form-control-input',
+				'placeholder' => 'E-mail',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
+				'class' => 'form-control form-control-input',
+				'placeholder' => 'Password',
 				'type' => 'password',
 			);
 
@@ -455,9 +468,9 @@ class Auth extends CI_Controller
 	{
 		$this->data['title'] = $this->lang->line('create_user_heading');
 
-		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
+		if ($this->ion_auth->logged_in())
 		{
-			redirect('index.php/auth', 'refresh');
+			redirect('index.php/short', 'refresh');
 		}
 
 		$tables = $this->config->item('tables', 'ion_auth');
@@ -499,7 +512,8 @@ class Auth extends CI_Controller
 			// check to see if we are creating the user
 			// redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("index.php/auth", 'refresh');
+			$this->ion_auth->login($identity, $password, FALSE);
+			redirect("index.php/short", 'refresh');
 		}
 		else
 		{
@@ -510,48 +524,63 @@ class Auth extends CI_Controller
 			$this->data['first_name'] = array(
 				'name' => 'first_name',
 				'id' => 'first_name',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'First Name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('first_name'),
 			);
 			$this->data['last_name'] = array(
 				'name' => 'last_name',
 				'id' => 'last_name',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'Last Name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('last_name'),
 			);
 			$this->data['identity'] = array(
 				'name' => 'identity',
 				'id' => 'identity',
+				'class'=>'form-control form-control-input',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('identity'),
 			);
 			$this->data['email'] = array(
 				'name' => 'email',
 				'id' => 'email',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'E-mail',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['company'] = array(
 				'name' => 'company',
 				'id' => 'company',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'Company Name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('company'),
 			);
 			$this->data['phone'] = array(
 				'name' => 'phone',
 				'id' => 'phone',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'Phone',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array(
 				'name' => 'password',
 				'id' => 'password',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'Password',
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password'),
 			);
 			$this->data['password_confirm'] = array(
 				'name' => 'password_confirm',
 				'id' => 'password_confirm',
+				'class'=>'form-control form-control-input',
+				'placeholder' => 'Confirm password',
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
@@ -872,5 +901,7 @@ class Auth extends CI_Controller
 			return $view_html;
 		}
 	}
+
+	
 
 }

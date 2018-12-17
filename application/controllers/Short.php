@@ -13,18 +13,17 @@ class Short extends CI_Controller {
         $this->load->library('ion_auth');
         if ($this-> ion_auth-> in_group ('members')) 
             { 
-                $this -> load -> view ( 'short_view' );
+                return;
             } 
-            $this-> ion_auth-> logged_in();
+            
         if (!$this-> ion_auth-> logged_in()) 
             { 
             redirect ('index.php/auth/login', 'refresh'); 
             } 
-            elseif ($this-> ion_auth-> is_admin()) 
-            { 
-                redirect ('index.php/auth/index', 'refresh');
-            } 
-           
+        elseif ($this-> ion_auth-> is_admin()) 
+        { 
+            redirect ('index.php/auth/index', 'refresh');
+        }          
         
    }
 

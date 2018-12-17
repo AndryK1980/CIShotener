@@ -1,20 +1,20 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
+<?php $this->load->view("header"); ?>
+<body>
+<div class="main-container">
 <h1><?php echo lang('create_user_heading');?></h1>
 <p><?php echo lang('create_user_subheading');?></p>
-
 <div id="infoMessage"><?php echo $message;?></div>
 
+<div class="row">
+<div class="col-md-4 offset-md-4">
+<div class="form-group input-group-lg">
 <?php echo form_open("index.php/auth/create_user");?>
-
-      <p>
-            <?php echo lang('create_user_fname_label', 'first_name');?> <br />
             <?php echo form_input($first_name);?>
-      </p>
-
-      <p>
-            <?php echo lang('create_user_lname_label', 'last_name');?> <br />
             <?php echo form_input($last_name);?>
-      </p>
-      
       <?php
       if($identity_column!=='email') {
           echo '<p>';
@@ -25,33 +25,17 @@
           echo '</p>';
       }
       ?>
-
-      <p>
-            <?php echo lang('create_user_company_label', 'company');?> <br />
             <?php echo form_input($company);?>
-      </p>
-
-      <p>
-            <?php echo lang('create_user_email_label', 'email');?> <br />
             <?php echo form_input($email);?>
-      </p>
-
-      <p>
-            <?php echo lang('create_user_phone_label', 'phone');?> <br />
             <?php echo form_input($phone);?>
-      </p>
-
-      <p>
-            <?php echo lang('create_user_password_label', 'password');?> <br />
             <?php echo form_input($password);?>
-      </p>
-
-      <p>
-            <?php echo lang('create_user_password_confirm_label', 'password_confirm');?> <br />
             <?php echo form_input($password_confirm);?>
-      </p>
-
-
-      <p><?php echo form_submit('submit', lang('create_user_submit_btn'));?></p>
+      <p><?php echo form_submit('submit', lang('create_user_submit_btn'),"class='btn btn-shorten'");?></p>
 
 <?php echo form_close();?>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

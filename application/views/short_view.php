@@ -1,3 +1,7 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
 <?php $this->load->view("header"); ?>
 <!-- <form action="http://localhost:8035/citest/index.php/short/insert" method="post">
     <label for="url">Enter your url</label>
@@ -6,11 +10,9 @@
     <input id="short-url-field" type="text" name="userUrlCode"/></td>
     <input id="btn-shorten" type="submit" value="send">
 </form>
-
-<a href="#"><?php //echo $myVar;?></a> -->
-<!-- <a id="short-url-link" href=""></a> -->
-
-<div class="main-container">
+ -->
+ <body>
+    <div class="main-container">
                <h1>URL Shortener</h1>
                <div class="row">
                    <div class="col-md-4 offset-md-4">

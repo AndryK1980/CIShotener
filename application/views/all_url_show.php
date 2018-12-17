@@ -1,5 +1,9 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
 <?php $this->load->view("header"); ?>
-
+<body>
 <div class="main-container">
                <h1>URL Shortener Data Base</h1>
                <div class="row">
