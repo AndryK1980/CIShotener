@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php echo form_close();?>
         <p><a href="create_user"><?php echo lang('index_create_user_link');?></a></p>
         </div>
-</div>  
+</div>   
 
 </div>
 </div>
